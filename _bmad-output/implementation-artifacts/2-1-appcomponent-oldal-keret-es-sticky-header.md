@@ -2,9 +2,9 @@
 storyId: '2.1'
 storyKey: '2-1-appcomponent-oldal-keret-es-sticky-header'
 epicId: '2'
-status: 'review'
+status: 'done'
 createdAt: '2026-03-21'
-completedAt: ''
+completedAt: '2026-03-22'
 ---
 
 # Story 2.1 — AppComponent oldal-keret és sticky header

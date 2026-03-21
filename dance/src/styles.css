@@ -27,6 +27,9 @@
     transition: none !important;
     animation: none !important;
   }
+  html {
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Smooth scroll — global (WCAG: `prefers-reduced-motion` override fent már letiltja) */
