@@ -71,8 +71,7 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true,
-              "localize": false,
-              "missingTranslation": "warning"
+              "localize": false
             }
           },
           "defaultConfiguration": "production"

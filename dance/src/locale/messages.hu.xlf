@@ -9,6 +9,10 @@
         <source>Zsófi tánciskola</source>
         <target state="final">Zsófi tánciskola</target>
       </trans-unit>
+      <trans-unit id="ssr-probe.validated" datatype="html">
+        <source>SSR + i18n validált</source>
+        <target state="final">SSR + i18n validált</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

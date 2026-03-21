@@ -2,9 +2,9 @@
 storyId: '1.3'
 storyKey: '1-3-ssr-i18n-validacios-prototipus'
 epicId: '1'
-status: 'ready-for-dev'
+status: 'review'
 createdAt: '2026-03-21'
-completedAt: ''
+completedAt: '2026-03-21'
 ---
 
 # Story 1.3 — SSR + i18n validációs prototípus
@@ -589,4 +589,15 @@ Legfontosabb szabályok erre a sztorira:
 
 ## Dev Notes
 
-_(Ide kerülnek az implementáció során felfedezett tanulságok)_
+- [x] **`SsrProbeComponent` létrehozva:** `src/app/components/ssr-probe/` — `isPlatformBrowser()` + `afterNextRender()` + Signal pattern. ✅
+- [x] **`AppComponent` frissítve:** `SsrProbeComponent` import + `<app-ssr-probe />` template-ben. ✅
+- [x] **`server.ts` locale-aware path fix:** `isLocalizedBuild` detekció + `browserDistFolder` helyes névtér + `APP_BASE_HREF` URL prefix-ből. ✅
+- [x] **`ng extract-i18n`:** 2 message extrahálva (`app.placeholder-heading`, `ssr-probe.validated`). ✅
+- [x] **`messages.en.xlf` frissítve:** `ssr-probe.validated` → "SSR + i18n validated". ✅
+- [x] **`messages.hu.xlf` frissítve (referencia):** `ssr-probe.validated` → "SSR + i18n validált" (state=final). ✅
+- [x] **`ng build --localize`:** Prerendered 2 static routes, 0 error, 0 warning. ✅
+- [x] **AC-2 validált:** HU index.html tartalmazza "SSR + i18n validált", EN — "SSR + i18n validated". Nincs `@@` raw key. ✅
+- [x] **AC-3 validált:** `node dist/dance/server/hu/server.mjs` — elindul, `http://localhost:4000/hu/` → HTTP 200, `<base href="/hu/">` helyes. ✅
+- [ ] **AC-4 (hydration mismatch):** Kézi böngésző teszt szükséges `ng serve` alatt — architektúrális okokból várhatóan nincs mismatch (`afterNextRender` hydration-safe minta).
+- [x] **PowerShell encoding:** `Get-Content` mojibake-t mutat UTF-8 fájlokra (CP1252 konzol) — ez csak megjelenites, a fájlok helyesen UTF-8 enkodáltak (a `read_file` eszköz igazolta).
+- **Ismert korlát (deferred):** `messages.hu.xlf` nincs referálva `angular.json`-ban (HU sourceLocale = template source stringekből épül). Ez helyes és várt viselkedés. Story 1.2 Dev Notes dokumentálta.
