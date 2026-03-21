@@ -2,8 +2,9 @@
 storyId: '1.2'
 storyKey: '1-2-build-time-i18n-konfiguracio-hu-en'
 epicId: '1'
-status: 'ready-for-dev'
+status: 'review'
 createdAt: '2026-03-21'
+completedAt: '2026-03-21'
 ---
 
 # Story 1.2 — Build-time i18n konfiguráció (HU + EN)
@@ -487,11 +488,64 @@ Legfontosabb szabályok erre a sztorira:
 
 ---
 
-## Dev Notes (kitöltendő implementáció után)
+## Dev Notes
 
-- [ ] Az `ng add @angular/localize` automatikusan frissítette az `angular.json` polyfills-t?
-- [ ] Volt-e bármilyen warningfelhős npm figyelmeztetés?
-- [ ] Az `ng build --localize` első futtatáskor leállt-e bármilyen konfigurációs hibával?
-- [ ] A build output struktúra megfelel-e a dokumentált `dist/dance/browser/hu/` + `dist/dance/browser/en/` útnak?
-- [ ] `ng test` futott-e hibák nélkül a spec frissítés után?
-- [ ] Bármilyen ismert probléma a következő sztori (1.3 — SSR+i18n validáció) számára?
+- [x] **`ng add @angular/localize` automatikusan frissítette:** `angular.json` polyfills (`@angular/localize/init`), `src/main.ts` (`/// <reference types="@angular/localize" />`), `tsconfig.app.json`, `tsconfig.spec.json`. ✅
+- [x] **npm warningok:** Csak deprecated csomagok (tar, glob) — Angular 18 belső függőségei, nem blokkolók.
+- [x] **`ng build --localize` első futtatás:** Hiba: "An i18n locale ('hu') cannot both be a source locale and provide a translation" — a story spec hibásan írta elő a `hu` bejegyzést a `locales` mapbe. Javítás: `sourceLocale` átalakítása objektummá `{ code: "hu", baseHref: "/hu/" }` formára, `hu` eltávolítása a `locales`-ből.
+- [x] **Build output struktúra:** `dist/dance/browser/hu/index.html` és `dist/dance/browser/en/index.html` — pontosan a várt struktúra. Prerendered 2 static routes. ✅
+- [x] **`ng test` (spec):** Nem futotott külön — Karma/headless Chrome nincs konfigurálva a CI környezetben. Az `app.component.spec.ts` minimalizlálva (csak `should create the app`), ami a welcome page teszteket eltávolította.
+- [x] **Encoding probléma (Windows-specifikus):** PowerShell `Set-Content` ANSI kódolással írt — `ng extract-i18n` moji-bake-et generalt. Megoldás: `[System.IO.File]::WriteAllText()` explicit UTF-8 No-BOM kódolással. Ez a pattern minden jövőbeli fájlműveletre vonatkozik!
+- [x] **Ismert problémák Story 1.3-nak:** Nincs kritikus probléma. A `missingTranslation: "warning"` be van állítva dev konfigban.
+
+---
+
+## Dev Agent Record
+
+### Implementation Plan
+
+1. `npx @angular/cli@18 add @angular/localize --skip-confirmation` — auto: polyfills, tsconfig, main.ts
+2. `angular.json` módosítása: `i18n` szekció hozzáadva (`sourceLocale: {code: hu, baseHref: /hu/}` + EN locale), `extract-i18n` outputPath `src/locale`, dev config `missingTranslation: warning`
+3. `app.component.html` → minimalis placeholder (`i18n="@@app.placeholder-heading"`)
+4. `app.component.ts` → `title` property eltávolítva
+5. `app.component.spec.ts` → welcome page tesztek eltávolítva
+6. `ng extract-i18n` → `messages.xlf` generálva (1 message, helyes UTF-8)
+7. `messages.en.xlf` létrehozva ("Zsófi Dance School") — explicit UTF-8 No-BOM
+8. `messages.hu.xlf` frissítve referenciáként (source == target, "Zsófi tánciskola")
+9. `ng build --localize` → 0 error, 0 warning, Prerendered 2 static routes ✅
+
+### Completion Notes
+
+✅ AC-1: `ng build --localize` 0 error, 0 warning. `dist/dance/browser/hu/` és `dist/dance/browser/en/` létrehozva.
+✅ AC-2: `ng extract-i18n` — `messages.xlf`-ben `<trans-unit id="app.placeholder-heading">` megjelent. `messages.en.xlf` tartalmaz megfelelő `<target>` elemet.
+✅ AC-3: `en/index.html` tartalmazza "Dance School", `hu/index.html` tartalmazza "tánciskola". Raw `@@` key nincs egyik buildben sem.
+
+Fontos elérés: a story spec hibásan írta elő a `hu` locale kettős definícióját (sourceLocale és locales is). Az `angular.json` helyes form: `sourceLocale` objektumként `{ code, baseHref }`, a `locales` map csak a fordítási localeket tartalmazza (EN).
+
+---
+
+## File List
+
+_Relatív útvonalak a repo gyökeréhez (`dance/`) képest_
+
+### Módosított fájlok
+- `dance/angular.json` — i18n szekció, extract-i18n outputPath, dev missingTranslation, `@angular/localize/init` polyfill
+- `dance/src/main.ts` — `/// <reference types="@angular/localize" />` hozzáadva (ng add)
+- `dance/tsconfig.app.json` — `@angular/localize` types hozzáadva (ng add)
+- `dance/tsconfig.spec.json` — `@angular/localize` types hozzáadva (ng add)
+- `dance/src/app/app.component.html` — welcome page → placeholder heading + router-outlet
+- `dance/src/app/app.component.ts` — `title` property eltávolítva
+- `dance/src/app/app.component.spec.ts` — welcome page tesztek eltávolítva
+- `dance/src/locale/messages.xlf` — `ng extract-i18n` felülszórta (1 trans-unit: app.placeholder-heading)
+- `dance/src/locale/messages.hu.xlf` — HU target bejegyzéssel frissítve (referencia)
+
+### Létrehozott fájlok
+- `dance/src/locale/messages.en.xlf` — EN fordítás ("Zsófi Dance School")
+
+---
+
+## Change Log
+
+| Dátum | Leírás |
+|---|---|
+| 2026-03-21 | Story 1.2 implementálva: `@angular/localize` telepítés, `angular.json` i18n konfig (`sourceLocale: hu`, EN locale), `ng extract-i18n`, `messages.en.xlf` létrehozva, `ng build --localize` → hu/ és en/ buildek. 0 error, 0 warning. |
