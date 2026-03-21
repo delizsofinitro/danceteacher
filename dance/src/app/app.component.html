@@ -1,4 +1,50 @@
-<!-- Placeholder - Story 2.1 (AppComponent shell) lecseréli a valódi tartalommal -->
-<h1 i18n="@@app.placeholder-heading">Zsófi tánciskola</h1>
-<app-ssr-probe />
-<router-outlet />
+<!-- Skip to content — first focusable element on the page (WCAG) -->
+<a href="#main-content"
+   class="sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-[10000] focus:bg-dark focus:text-cream focus:px-4 focus:py-2"
+   i18n="@@a11y.skip-to-content">Ugrás a tartalomra</a>
+
+<!-- Sticky header -->
+<header class="sticky top-0 z-[100] bg-cream/95 backdrop-blur h-16 border-b border-dark/10">
+  <div class="max-w-[1200px] mx-auto h-full px-4 flex items-center justify-between">
+
+    <!-- Logo / site name -->
+    <a href="/"
+       class="font-serif text-lg font-semibold text-dark no-underline"
+       i18n="@@header.site-name">Zsófi Tánciskola</a>
+
+    <!-- Desktop navigation — hidden on mobile, visible md+ -->
+    <nav class="hidden md:flex items-center gap-6"
+         aria-label="Főmenü"
+         i18n-aria-label="@@nav.aria-label">
+      <a href="#bemutatkozas"
+         class="text-xs uppercase tracking-[0.06em] text-dark/60 hover:text-dark transition-colors"
+         i18n="@@nav.about">Bemutatkozás</a>
+      <a href="#szolgaltatasok"
+         class="text-xs uppercase tracking-[0.06em] text-dark/60 hover:text-dark transition-colors"
+         i18n="@@nav.services">Szolgáltatások</a>
+      <a href="#galeria"
+         class="text-xs uppercase tracking-[0.06em] text-dark/60 hover:text-dark transition-colors"
+         i18n="@@nav.gallery">Galéria</a>
+      <a href="#kapcsolat"
+         class="text-xs uppercase tracking-[0.06em] text-dark/60 hover:text-dark transition-colors"
+         i18n="@@nav.contact">Kapcsolat</a>
+    </nav>
+
+    <!-- Right side: LanguageSwitcher slot + MobileNavigation slot -->
+    <div class="flex items-center gap-3">
+      <!-- LanguageSwitcher — Story 2.2 -->
+      <!-- MobileNavigation toggle — Story 2.3 (mobile only) -->
+    </div>
+
+  </div>
+</header>
+
+<!-- Main content area -->
+<main id="main-content">
+  <router-outlet />
+</main>
+
+<!-- Footer placeholder — Epic 3+ -->
+<footer class="bg-burgundy text-cream/80 text-center py-6 text-sm">
+  <p i18n="@@footer.copyright">&copy; 2026 Zsófi Tánciskola</p>
+</footer>

@@ -2,18 +2,88 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="hu" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="app.placeholder-heading" datatype="html">
-        <source>Zsófi tánciskola</source>
+      <trans-unit id="a11y.skip-to-content" datatype="html">
+        <source>Ugrás a tartalomra</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">2,4</context>
+          <context context-type="linenumber">4,7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ssr-probe.validated" datatype="html">
-        <source>SSR + i18n validált</source>
+      <trans-unit id="header.site-name" datatype="html">
+        <source>Zsófi Tánciskola</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/ssr-probe/ssr-probe.component.html</context>
-          <context context-type="linenumber">3,4</context>
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nav.aria-label" datatype="html">
+        <source>Főmenü</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nav.about" datatype="html">
+        <source>Bemutatkozás</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">21,22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nav.services" datatype="html">
+        <source>Szolgáltatások</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nav.gallery" datatype="html">
+        <source>Galéria</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nav.contact" datatype="html">
+        <source>Kapcsolat</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">30,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="footer.copyright" datatype="html">
+        <source>© 2026 Zsófi Tánciskola</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">49,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="meta.title" datatype="html">
+        <source>Zsófi Tánciskola | Tánc és mozgás</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="meta.og-locale" datatype="html">
+        <source>hu_HU</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="meta.og-title" datatype="html">
+        <source>Zsófi Tánciskola</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="meta.og-description" datatype="html">
+        <source>Professzionális táncoktatás és koreográfia</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
     </body>

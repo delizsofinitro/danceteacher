@@ -2,7 +2,7 @@
 storyId: '2.1'
 storyKey: '2-1-appcomponent-oldal-keret-es-sticky-header'
 epicId: '2'
-status: 'ready-for-dev'
+status: 'review'
 createdAt: '2026-03-21'
 completedAt: ''
 ---
@@ -294,3 +294,82 @@ node dist\dance\server\hu\server.mjs
 ## Dev Notes
 
 _(Ide kerülnek az implementáció során felfedezett tanulságok)_
+
+---
+
+## Tasks / Subtasks
+
+- [x] **Task 1 — `app.component.ts` újraírása**
+  - [x] `SsrProbeComponent` import eltávolítva
+  - [x] `Meta` és `Title` service `inject()` és konstruktorban beállítva
+  - [x] `$localize` kulcsok: `meta.title`, `meta.og-locale`, `meta.og-title`, `meta.og-description`
+- [x] **Task 2 — `app.component.html` teljes újraírása**
+  - [x] Skip-to-content link (`href="#main-content"`, `@@a11y.skip-to-content`)
+  - [x] Sticky `<header>` — `sticky top-0 z-[100] bg-cream/95 backdrop-blur h-16`
+  - [x] `<nav aria-label="Főmenü"` `i18n-aria-label="@@nav.aria-label"` 4 link-kel
+  - [x] Desktop nav linkek: `@@nav.about`, `@@nav.services`, `@@nav.gallery`, `@@nav.contact`
+  - [x] LanguageSwitcher és MobileNavigation slot megjegyzés
+  - [x] `<main id="main-content">` + `<router-outlet />`
+  - [x] `<footer>` placeholder — `@@footer.copyright`
+- [x] **Task 3 — `src/styles.css` globális stílusok**
+  - [x] `html { scroll-behavior: smooth; }` hozzáadva
+  - [x] `[id] { scroll-margin-top: 80px; }` hozzáadva
+  - [x] `:focus-visible` outline: 2px solid coral hozzáadva (WCAG)
+- [x] **Task 4 — `app.component.spec.ts` frissítése**
+  - [x] `provideRouter([])` hozzáadva
+  - [x] 6 spec: create, sticky header, skip-link, main#main-content, 4 nav link, footer
+- [x] **Task 5 — i18n**
+  - [x] `ng extract-i18n` futtatva — 12 üzenet kinyerve
+  - [x] `messages.en.xlf` frissítve — 12 EN fordítás
+  - [x] `messages.hu.xlf` referencia fájl szinkronizálva
+- [x] **Task 6 — Build validáció**
+  - [x] `ng build --localize` — 0 error, 2 static route prerendered
+  - [x] HU: `<title>Zsófi Tánciskola | Tánc és mozgás</title>`, `og:locale=hu_HU`
+  - [x] EN: `<title>Zsófi Dance School | Dance &amp; movement</title>`, `og:locale=en_US`
+  - [x] HU nav: Bemutatkozás / Szolgáltatások / Galéria / Kapcsolat
+  - [x] EN nav: About / Services / Gallery / Contact
+
+---
+
+## Dev Agent Record
+
+### Implementation Plan
+
+- `app.component.ts`: `SsrProbeComponent` eltávolítva; `Meta`/`Title` inject; `$localize` kulcsok a konstruktorban (SSR-safe, nem kell `isPlatformBrowser()`)
+- `app.component.html`: Teljes újraírás — skip-to-content link + sticky header (Tailwind classes: `sticky top-0 z-[100] bg-cream/95 backdrop-blur h-16`) + 4 desktop nav link (hash anchor, nem routerLink) + LanguageSwitcher/MobileNavigation slot commentek + `<main id="main-content">` + `<footer>` placeholder
+- `styles.css`: `scroll-behavior: smooth`, `scroll-margin-top: 80px`, `:focus-visible` outline
+- `app.component.spec.ts`: 6 spec, `provideRouter([])` provider
+- i18n: 12 kulcs extraktálva, EN fordítások megírva
+
+### Completion Notes
+
+- ✅ AC-1: Header `position:sticky` Tailwind osztályokkal — minden képernyőméreten
+- ✅ AC-2: Logo bal, desktop nav középen/jobbra, slot-ok jobb szélén
+- ✅ AC-3: Nav linkek `href="#anchor"` — CSS `scroll-behavior:smooth`; `prefers-reduced-motion` letiltja a transitions-t globálisan
+- ✅ AC-4: Minden látható szöveg `i18n`-jelölt — HU/EN build helyes feliratokkal igazolva
+- ✅ AC-5: Szemantikus HTML — `<header>`, `<nav aria-label>`, `<main id="main-content">`, `<footer>`, skip-to-content
+- ✅ AC-6: Meta service — `og:type=website`, `og:locale=hu_HU|en_US`, `og:title`, `og:description`, `<title>` locale-specifikus
+- ℹ️ `ssr-probe.validated` kulcs eltűnt a build-ből (SsrProbeComponent nincs importálva — helyes)
+- ℹ️ `app.placeholder-heading` eltávolítva a messages.xlf-ből (helyes — placeholder lecserélve)
+
+---
+
+## File List
+
+| Fájl | Változás |
+|---|---|
+| `dance/src/app/app.component.ts` | ✏️ Újraírva — SsrProbeComponent ki, Meta/Title/\$localize be |
+| `dance/src/app/app.component.html` | ✏️ Újraírva — teljes shell: skip-link, sticky header, main, footer |
+| `dance/src/app/app.component.spec.ts` | ✏️ Frissítve — 6 spec, provideRouter |
+| `dance/src/styles.css` | ✏️ Bővítve — scroll-behavior, scroll-margin-top, :focus-visible |
+| `dance/src/locale/messages.xlf` | ✏️ ng extract-i18n frissítette — 12 kulcs |
+| `dance/src/locale/messages.en.xlf` | ✏️ Manuálisan frissítve — 12 EN fordítás |
+| `dance/src/locale/messages.hu.xlf` | ✏️ Referencia szinkronizálva — 12 HU kulcs |
+
+---
+
+## Change Log
+
+| Dátum | Változás |
+|---|---|
+| 2026-03-21 | Story 2.1 implementálva: AppComponent shell teljes újraírás, sticky header, skip-to-content, i18n Meta tags, 6 spec, 12 i18n kulcs, build validált |

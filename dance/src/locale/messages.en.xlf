@@ -2,13 +2,53 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="hu" target-language="en" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="app.placeholder-heading" datatype="html">
-        <source>Zsófi tánciskola</source>
+      <trans-unit id="a11y.skip-to-content" datatype="html">
+        <source>Ugrás a tartalomra</source>
+        <target state="translated">Skip to content</target>
+      </trans-unit>
+      <trans-unit id="header.site-name" datatype="html">
+        <source>Zsófi Tánciskola</source>
         <target state="translated">Zsófi Dance School</target>
       </trans-unit>
-      <trans-unit id="ssr-probe.validated" datatype="html">
-        <source>SSR + i18n validált</source>
-        <target state="translated">SSR + i18n validated</target>
+      <trans-unit id="nav.aria-label" datatype="html">
+        <source>Főmenü</source>
+        <target state="translated">Main menu</target>
+      </trans-unit>
+      <trans-unit id="nav.about" datatype="html">
+        <source>Bemutatkozás</source>
+        <target state="translated">About</target>
+      </trans-unit>
+      <trans-unit id="nav.services" datatype="html">
+        <source>Szolgáltatások</source>
+        <target state="translated">Services</target>
+      </trans-unit>
+      <trans-unit id="nav.gallery" datatype="html">
+        <source>Galéria</source>
+        <target state="translated">Gallery</target>
+      </trans-unit>
+      <trans-unit id="nav.contact" datatype="html">
+        <source>Kapcsolat</source>
+        <target state="translated">Contact</target>
+      </trans-unit>
+      <trans-unit id="footer.copyright" datatype="html">
+        <source>© 2026 Zsófi Tánciskola</source>
+        <target state="translated">© 2026 Zsófi Dance School</target>
+      </trans-unit>
+      <trans-unit id="meta.title" datatype="html">
+        <source>Zsófi Tánciskola | Tánc és mozgás</source>
+        <target state="translated">Zsófi Dance School | Dance &amp; movement</target>
+      </trans-unit>
+      <trans-unit id="meta.og-locale" datatype="html">
+        <source>hu_HU</source>
+        <target state="translated">en_US</target>
+      </trans-unit>
+      <trans-unit id="meta.og-title" datatype="html">
+        <source>Zsófi Tánciskola</source>
+        <target state="translated">Zsófi Dance School</target>
+      </trans-unit>
+      <trans-unit id="meta.og-description" datatype="html">
+        <source>Professzionális táncoktatás és koreográfia</source>
+        <target state="translated">Professional dance education and choreography</target>
       </trans-unit>
     </body>
   </file>

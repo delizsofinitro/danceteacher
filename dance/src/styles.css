@@ -28,3 +28,19 @@
     animation: none !important;
   }
 }
+
+/* Smooth scroll — global (WCAG: `prefers-reduced-motion` override fent már letiltja) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll offset all anchor targets — prevents sticky header from covering section headings */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Focus indicator — all focusable elements (WCAG 2.1 AA) */
+:focus-visible {
+  outline: 2px solid theme('colors.coral');
+  outline-offset: 3px;
+}
