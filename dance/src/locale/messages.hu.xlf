@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- REFERENCE FILE ONLY — not referenced in angular.json.
+     HU translations come from template source strings (hu = sourceLocale).
+     Keep in sync with messages.xlf after ng extract-i18n. -->
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="hu" target-language="hu" datatype="plaintext" original="ng2.template">
     <body>

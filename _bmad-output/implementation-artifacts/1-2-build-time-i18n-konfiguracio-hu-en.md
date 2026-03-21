@@ -2,7 +2,7 @@
 storyId: '1.2'
 storyKey: '1-2-build-time-i18n-konfiguracio-hu-en'
 epicId: '1'
-status: 'review'
+status: 'done'
 createdAt: '2026-03-21'
 completedAt: '2026-03-21'
 ---
