@@ -2,9 +2,9 @@
 storyId: '1.4'
 storyKey: '1-4-vercel-deploy-konfiguracio-github-actions-cicd'
 epicId: '1'
-status: 'ready-for-dev'
+status: 'review'
 createdAt: '2026-03-21'
-completedAt: ''
+completedAt: '2026-03-21'
 ---
 
 # Story 1.4 — Vercel deploy konfiguráció & GitHub Actions CI/CD
@@ -360,3 +360,60 @@ Legfontosabb szabályok erre a sztorira:
 ## Dev Notes
 
 _(Ide kerülnek az implementáció során felfedezett tanulságok)_
+
+---
+
+## Tasks / Subtasks
+
+- [x] **Task 1 — `vercel.json` frissítése**
+  - [x] `buildCommand`: `npx @angular/cli@18 build --localize`
+  - [x] `outputDirectory`: `dist/dance/browser`
+  - [x] `redirects`: `/` → `/hu/` (302)
+  - [x] `Referrer-Policy` header hozzáadása
+- [x] **Task 2 — `.github/workflows/ci.yml` létrehozása**
+  - [x] `defaults.run.working-directory: dance`
+  - [x] `actions/setup-node@v4` Node 20 LTS, `cache-dependency-path: dance/package-lock.json`
+  - [x] `npm ci` + `npx @angular/cli@18 build --localize`
+  - [x] Vercel deploy step (`if: main push`) `amondnet/vercel-action@v25`
+- [x] **Task 3 — Lokális validáció**
+  - [x] `ng build --localize` sikeresen lefut (2 static route prerendered)
+  - [x] `dist/dance/browser/hu/index.html` és `en/index.html` létezik és helyes tartalom
+  - [x] `vercel.json` szintaktikailag valid JSON (ConvertFrom-Json ellenőrzés)
+
+---
+
+## Dev Agent Record
+
+### Implementation Plan
+
+A story két fájlt érint:
+1. `dance/vercel.json` — teljes csere: meglévő CSP headers megtartva + `buildCommand`, `outputDirectory`, `redirects`, `Referrer-Policy` header hozzáadva
+2. `.github/workflows/ci.yml` — új fájl a repo gyökerében: `defaults.run.working-directory: dance`, Node 20 LTS cache, `npm ci`, `npx @angular/cli@18 build --localize`, Vercel deploy step csak main push-ra
+
+### Completion Notes
+
+- ✅ `dance/vercel.json` frissítve: `buildCommand`, `outputDirectory: dist/dance/browser`, `redirects /→/hu/ (302)`, `Referrer-Policy: strict-origin-when-cross-origin`
+- ✅ `.github/workflows/ci.yml` létrehozva: Node 20 LTS, `npm ci`, `npx @angular/cli@18 build --localize`, Vercel deploy conditional (main push)
+- ✅ Build validáció sikeres: `ng build --localize` → 0 error, 2 static route prerendered
+- ✅ AC-4: `dist/dance/browser/hu/index.html` → HU tartalom; `dist/dance/browser/en/index.html` → EN tartalom
+- ✅ AC-1: `vercel.json` valid JSON, CSP headers megvannak (frame-src YouTube, connect-src formsubmit), redirect `/→/hu/`
+- ✅ AC-2: CI workflow létezik, main branch trigger, build + deploy lépések
+- ✅ AC-3: `outputDirectory: dist/dance/browser`, `buildCommand` beállítva
+- ℹ️ A tényleges Vercel account setup és GitHub Secrets beállítása manuális lépés (AC scope-on kívül)
+
+---
+
+## File List
+
+| Fájl | Változás |
+|---|---|
+| `dance/vercel.json` | ✏️ Módosítva — `buildCommand`, `outputDirectory`, `redirects`, `Referrer-Policy` header hozzáadva |
+| `.github/workflows/ci.yml` | 🆕 Létrehozva — GitHub Actions CI/CD workflow |
+
+---
+
+## Change Log
+
+| Dátum | Változás |
+|---|---|
+| 2026-03-21 | Story 1.4 implementálva: `vercel.json` frissítve (buildCommand, outputDirectory, redirects, Referrer-Policy), `.github/workflows/ci.yml` létrehozva, build validáció sikeres |

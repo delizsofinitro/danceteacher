@@ -1,4 +1,6 @@
 {
+  "buildCommand": "npx @angular/cli@18 build --localize",
+  "outputDirectory": "dist/dance/browser",
   "headers": [
     {
       "source": "/(.*)",
@@ -14,8 +16,19 @@
         {
           "key": "X-Frame-Options",
           "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/hu/",
+      "permanent": false
     }
   ]
 }
