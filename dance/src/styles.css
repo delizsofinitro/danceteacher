@@ -1,0 +1,30 @@
+/* Google Fonts — font-display: swap a FOUT megelőzéséhez */
+/* @import KÖTELEZŐEN a fájl elején kell lennie (CSS spec) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* Tailwind base layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global typography */
+@layer base {
+  h1, h2, h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: theme('colors.cream');
+    color: theme('colors.dark');
+    @apply text-base leading-relaxed;
+  }
+}
+
+/* prefers-reduced-motion — globális override (WCAG FR37) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

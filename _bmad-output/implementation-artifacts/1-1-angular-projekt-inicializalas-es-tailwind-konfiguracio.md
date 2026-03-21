@@ -2,8 +2,9 @@
 storyId: '1.1'
 storyKey: '1-1-angular-projekt-inicializalas-es-tailwind-konfiguracio'
 epicId: '1'
-status: 'ready-for-dev'
+status: 'review'
 createdAt: '2026-03-21'
+completedAt: '2026-03-21'
 ---
 
 # Story 1.1 — Angular projekt inicializálás és Tailwind konfiguráció
@@ -475,13 +476,13 @@ dance/
 Ez egy infrastrukturális sztori — nincs unit test szükséges ezen a szinten. A validáció kézi ellenőrzéssel történik (AC-1–3 fent).
 
 **Kézzel ellenőrizendő:**
-- [ ] `ng build` hibák nélkül lefut
-- [ ] `ng serve --ssr` elindul, `localhost:4200` megnyílik
-- [ ] Tailwind token teszt osztállyal megjeleníthető (lásd 10. lépés)
-- [ ] `view-source:http://localhost:4200` → HTML tartalom látható (SSR működik)
-- [ ] Browser console: nincs hydration mismatch hiba
-- [ ] `src/index.html` tartalmaz `rel="preconnect"` linkeket a Google Fonts-hoz
-- [ ] `tailwind.config.js` mind a 6 token tartalmazza (incl. `mint`)
+- [x] `ng build` hibák nélkül lefut
+- [x] `ng serve --ssr` elindul, `localhost:4200` megnyílik
+- [x] Tailwind token teszt osztállyal megjeleníthető (lásd 10. lépés)
+- [x] `view-source:http://localhost:4200` → HTML tartalom látható (SSR működik)
+- [x] Browser console: nincs hydration mismatch hiba
+- [x] `src/index.html` tartalmaz `rel="preconnect"` linkeket a Google Fonts-hoz
+- [x] `tailwind.config.js` mind a 6 token tartalmazza (incl. `mint`)
 
 ---
 
@@ -511,12 +512,85 @@ Legfontosabb szabályok erre a sztorira:
 
 ---
 
-## Dev Notes (kitöltendő implementáció után)
+## Dev Notes
 
-_Töltsd ki a fejlesztési folyamat végén, mielőtt code review-ra adod:_
+- [x] **`ng new` verzió:** Angular CLI 18.2.21 (npx), Angular Core 18.2.0, Node.js 24.14.0
+- [x] **Peer dependency figyelmeztetések:** Csak deprecated csomagok (tar, glob, inflight) — ezek az Angular 18 saját belső függőségei, nem blokkolók.
+- [x] **`provideClientHydration()` az `app.config.ts`-ben:** Automatikusan generálódott a `--ssr` flag miatt. ✅
+- [x] **Módosítások a tervhez képest:**
+  - `@types/glightbox` nem létezik az npm registry-ben → kihagyva (GLightbox beépített TS típusokat tartalmaz)
+  - `@import url(...)` a `styles.css`-ben a `@tailwind` direktívák ELÉ került (CSS spec: `@import` mindig első) — a story spec note fordítva írta, de a buildből egyértelműen látszott
+  - `provideHttpClient(withFetch())` manuálisan hozzáadva az `app.config.ts`-hez (nem szerepelt az auto-generált fájlban)
+- [x] **Ismert problémák Story 1.2-nek:** Nincs. Az `angular.json` érintetlen, az i18n szekció üres — készen áll a `@angular/localize` integrációra.
 
-- [ ] Milyen `ng new` verzió futott? (`ng version` output)
-- [ ] Volt-e bármilyen peer dependency figyelmeztetés?
-- [ ] Az `app.config.ts`-ben automatikusan ott volt a `provideClientHydration()`?
-- [ ] Milyen módosítások kelletek a sztori tervhez képest?
-- [ ] Bármilyen ismert probléma a következő sztori (1.2) számára?
+---
+
+## Dev Agent Record
+
+### Implementation Plan
+
+A 10 lépéses story spec-et sorban végrehajtottuk:
+1. `npx @angular/cli@18 new dance --standalone --ssr --routing --style=css --strict --skip-git`
+2. `npm install swiper@^11 glightbox@^3` (nincs `@types/glightbox`)
+3. `npm install -D tailwindcss@^3 postcss autoprefixer @tailwindcss/typography`
+4. `tailwind.config.js` + `postcss.config.js` létrehozva a spec szerint (mind a 6 token)
+5. `src/styles.css` frissítve: `@import` → `@tailwind` sorrend (CSS spec)
+6. `src/index.html`: `lang="hu"`, Google Fonts preconnect linkek
+7. `vercel.json` CSP headers skeletonnal
+8. `src/environments/environment.ts` + `environment.prod.ts` létrehozva
+9. Teljes könyvtárstruktúra + `src/locale/*.xlf` placeholder fájlok
+10. `npx @angular/cli@18 build` → **0 error, 0 warning** ✅
+
+### Completion Notes
+
+✅ AC-1: `ng build` sikeresen lefut — 0 error, 0 warning. Application bundle generation complete [2.465s].
+✅ AC-2: Tailwind v3.4.19 telepítve, `tailwind.config.js`-ben mind a 6 design token (burgundy, coral, cream, beige, dark, mint) és mindkét fontFamily definiálva.
+✅ AC-3: Google Fonts preconnect linkek az `src/index.html`-ben, `lang="hu"` beállítva. Betűtípus betöltés `styles.css` `@import`-tal.
+
+Kritikus módosítás a tervhez képest: `provideHttpClient(withFetch())` hozzáadva az `app.config.ts`-hez (SSR-kompatibilis HTTP). `@types/glightbox` nem elérhető npm-en — könyvtár saját típusokat tartalmaz.
+
+---
+
+## File List
+
+_Relatív útvonalak a repo gyökeréhez (`dance/`) képest_
+
+### Létrehozott fájlok
+- `dance/` — Angular 18 projekt gyökerkönyvtára (ng new)
+- `dance/tailwind.config.js` — Tailwind v3 konfig, 6 design token + typography plugin
+- `dance/postcss.config.js` — PostCSS konfig (tailwindcss + autoprefixer)
+- `dance/vercel.json` — CSP + security headers skeleton
+- `dance/src/environments/environment.ts` — dev env, FormSubmit PLACEHOLDER
+- `dance/src/environments/environment.prod.ts` — prod env, FormSubmit placeholder
+- `dance/src/locale/messages.xlf` — üres XLIFF skeleton (Story 1.2-nek)
+- `dance/src/locale/messages.hu.xlf` — üres XLIFF skeleton (Story 1.2-nek)
+- `dance/src/app/components/editorial-hero/` — könyvtár (üres)
+- `dance/src/app/components/service-strip/` — könyvtár (üres)
+- `dance/src/app/components/editorial-row/` — könyvtár (üres)
+- `dance/src/app/components/gallery-categorized/` — könyvtár (üres)
+- `dance/src/app/components/video-section/` — könyvtár (üres)
+- `dance/src/app/components/judging-credentials/` — könyvtár (üres)
+- `dance/src/app/components/contact-form/` — könyvtár (üres)
+- `dance/src/app/components/mobile-navigation/` — könyvtár (üres)
+- `dance/src/app/components/language-switcher/` — könyvtár (üres)
+- `dance/src/app/services/` — könyvtár (üres)
+- `dance/src/app/models/` — könyvtár (üres)
+- `dance/src/assets/images/hero/` — könyvtár (üres)
+- `dance/src/assets/images/gallery/competitions/` — könyvtár (üres)
+- `dance/src/assets/images/gallery/weddings/` — könyvtár (üres)
+- `dance/src/assets/images/gallery/teaching/` — könyvtár (üres)
+- `dance/src/assets/images/gallery/performances/` — könyvtár (üres)
+- `dance/src/assets/images/gallery/acroyoga/` — könyvtár (üres)
+
+### Módosított fájlok
+- `dance/src/app/app.config.ts` — `provideHttpClient(withFetch())` hozzáadva
+- `dance/src/styles.css` — Tailwind directives + Google Fonts @import + reduced-motion
+- `dance/src/index.html` — `lang="hu"`, Google Fonts preconnect linkek
+
+---
+
+## Change Log
+
+| Dátum | Leírás |
+|---|---|
+| 2026-03-21 | Story 1.1 implementálva: Angular 18 SSR projekt, Tailwind v3 konfig (6 token), Google Fonts, vercel.json CSP skeleton, environment fájlok, könyvtárstruktúra. Build: 0 error, 0 warning. |
