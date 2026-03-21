@@ -368,6 +368,7 @@ _(Ide kerülnek az implementáció során felfedezett tanulságok)_
 - [x] **Task 1 — `vercel.json` frissítése**
   - [x] `buildCommand`: `npx @angular/cli@18 build --localize`
   - [x] `outputDirectory`: `dist/dance/browser`
+  - [x] `rootDirectory`: `dance` — *review patch (AC-3)*
   - [x] `redirects`: `/` → `/hu/` (302)
   - [x] `Referrer-Policy` header hozzáadása
 - [x] **Task 2 — `.github/workflows/ci.yml` létrehozása**
@@ -380,9 +381,29 @@ _(Ide kerülnek az implementáció során felfedezett tanulságok)_
   - [x] `dist/dance/browser/hu/index.html` és `en/index.html` létezik és helyes tartalom
   - [x] `vercel.json` szintaktikailag valid JSON (ConvertFrom-Json ellenőrzés)
 
+### Review Follow-ups (AI)
+
+- [x] **[AI-Review] [High] P1 — CI trigger `[main]` → `[master]`** — workflow soha nem futott volna el
+- [x] **[AI-Review] [High] P2 — `rootDirectory: "dance"` hozzáadása `vercel.json`-ba** — AC-3 követelmény
+- [x] **[AI-Review] [High] P3 — `vercel-action` SHA pinelve** — supply chain védelem
+- [x] **[AI-Review] [High] P4 — `permissions: contents: read`** — least-privilege GITHUB_TOKEN
+
 ---
 
 ## Dev Agent Record
+
+### Senior Developer Review (AI)
+
+**Review dátuma:** 2026-03-21  
+**Eredmény:** Changes Requested  
+**Action Items:** 4 High, 1 Bad Spec (halasztva), 9 Defer
+
+**Action Items:**
+- [x] [High] P1 — CI trigger `[main]` → `[master]` branch
+- [x] [High] P2 — `rootDirectory: "dance"` hozzáadása `vercel.json`-ba
+- [x] [High] P3 — `amondnet/vercel-action@v25` SHA-ra pinelve
+- [x] [High] P4 — `permissions: contents: read` a build job-ba
+- [ ] [Bad Spec / Defer] BS1 — CI workflow-ban nincs test lépés (spec kiegészítés halasztva Epic 2-re)
 
 ### Implementation Plan
 
@@ -392,13 +413,17 @@ A story két fájlt érint:
 
 ### Completion Notes
 
-- ✅ `dance/vercel.json` frissítve: `buildCommand`, `outputDirectory: dist/dance/browser`, `redirects /→/hu/ (302)`, `Referrer-Policy: strict-origin-when-cross-origin`
-- ✅ `.github/workflows/ci.yml` létrehozva: Node 20 LTS, `npm ci`, `npx @angular/cli@18 build --localize`, Vercel deploy conditional (main push)
+- ✅ `dance/vercel.json` frissítve: `buildCommand`, `outputDirectory: dist/dance/browser`, `rootDirectory: dance`, `redirects /→/hu/ (302)`, `Referrer-Policy: strict-origin-when-cross-origin`
+- ✅ `.github/workflows/ci.yml` létrehozva: Node 20 LTS, `npm ci`, `npx @angular/cli@18 build --localize`, Vercel deploy conditional (master push)
 - ✅ Build validáció sikeres: `ng build --localize` → 0 error, 2 static route prerendered
 - ✅ AC-4: `dist/dance/browser/hu/index.html` → HU tartalom; `dist/dance/browser/en/index.html` → EN tartalom
 - ✅ AC-1: `vercel.json` valid JSON, CSP headers megvannak (frame-src YouTube, connect-src formsubmit), redirect `/→/hu/`
-- ✅ AC-2: CI workflow létezik, main branch trigger, build + deploy lépések
-- ✅ AC-3: `outputDirectory: dist/dance/browser`, `buildCommand` beállítva
+- ✅ AC-2: CI workflow létezik, master branch trigger, build + deploy lépések
+- ✅ AC-3: `outputDirectory: dist/dance/browser`, `rootDirectory: dance`, `buildCommand` beállítva
+- ✅ Review P1: CI trigger `[main]` → `[master]` javítva
+- ✅ Review P2: `rootDirectory: "dance"` hozzáadva `vercel.json`-ba (AC-3 megfelelőség)
+- ✅ Review P3: `amondnet/vercel-action` SHA-ra pinelve (`25afe0a...`) supply chain védelem
+- ✅ Review P4: `permissions: contents: read` hozzáadva a build job-hoz
 - ℹ️ A tényleges Vercel account setup és GitHub Secrets beállítása manuális lépés (AC scope-on kívül)
 
 ---
@@ -417,3 +442,4 @@ A story két fájlt érint:
 | Dátum | Változás |
 |---|---|
 | 2026-03-21 | Story 1.4 implementálva: `vercel.json` frissítve (buildCommand, outputDirectory, redirects, Referrer-Policy), `.github/workflows/ci.yml` létrehozva, build validáció sikeres |
+| 2026-03-21 | Review follow-up patches: CI trigger master-re javítva, rootDirectory hozzáadva, vercel-action SHA-ra pinelve, permissions: contents: read hozzáadva |

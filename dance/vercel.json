@@ -1,6 +1,7 @@
 {
   "buildCommand": "npx @angular/cli@18 build --localize",
   "outputDirectory": "dist/dance/browser",
+  "rootDirectory": "dance",
   "headers": [
     {
       "source": "/(.*)",

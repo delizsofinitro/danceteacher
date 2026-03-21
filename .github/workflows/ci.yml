@@ -2,13 +2,15 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     defaults:
       run:
         working-directory: dance
@@ -31,7 +33,7 @@ jobs:
 
       - name: Deploy to Vercel
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: amondnet/vercel-action@v25
+        uses: amondnet/vercel-action@25afe0a05cce802fbd7bb9e2d4cee1b5489297c4  # v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
