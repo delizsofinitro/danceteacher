@@ -45,7 +45,7 @@ development_status:
   epic-1: in-progress
   1-1-angular-projekt-inicializalas-es-tailwind-konfiguracio: done
   1-2-build-time-i18n-konfiguracio-hu-en: done
-  1-3-ssr-i18n-validacios-prototipus: backlog
+  1-3-ssr-i18n-validacios-prototipus: ready-for-dev
   1-4-vercel-deploy-konfiguracio-github-actions-cicd: backlog
   epic-1-retrospective: optional
 
