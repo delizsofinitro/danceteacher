@@ -2,7 +2,7 @@
 storyId: '1.4'
 storyKey: '1-4-vercel-deploy-konfiguracio-github-actions-cicd'
 epicId: '1'
-status: 'review'
+status: 'done'
 createdAt: '2026-03-21'
 completedAt: '2026-03-21'
 ---
