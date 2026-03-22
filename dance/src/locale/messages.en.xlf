@@ -59,8 +59,16 @@
         <target state="translated">Switch to Hungarian</target>
       </trans-unit>
       <trans-unit id="lang-switcher.switch-to-en" datatype="html">
-        <source>English</source>
-        <target state="translated">English</target>
+        <source>Váltás angolra</source>
+        <target state="translated">Switch to English</target>
+      </trans-unit>
+      <trans-unit id="lang-switcher.label-hu" datatype="html">
+        <source>HU</source>
+        <target state="translated">HU</target>
+      </trans-unit>
+      <trans-unit id="lang-switcher.label-en" datatype="html">
+        <source>EN</source>
+        <target state="translated">EN</target>
       </trans-unit>
     </body>
   </file>

@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        burgundy: '#754247',
+        // burgundy: '#754247',
+        burgundy: '#aa313d',
         coral:    '#DC6567',
         cream:    '#F9EBDB',
         beige:    '#E8DBC9',

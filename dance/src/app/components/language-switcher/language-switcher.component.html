@@ -4,24 +4,26 @@
       <a href="/hu/"
          hreflang="hu"
          lang="hu"
-         [attr.aria-current]="locale === 'hu' ? 'page' : null"
-         [class]="locale === 'hu'
+         [attr.aria-current]="locale.startsWith('hu') ? 'page' : null"
+         [class]="locale.startsWith('hu')
            ? 'text-coral underline font-semibold'
-           : 'text-dark/80 hover:text-dark transition-opacity duration-200'"
+           : 'text-dark opacity-60 hover:opacity-100 transition-opacity duration-200'"
          i18n-aria-label="@@lang-switcher.switch-to-hu"
-         aria-label="Magyar">HU</a>
+         aria-label="Magyar"
+         i18n="@@lang-switcher.label-hu">HU</a>
     </li>
     <li aria-hidden="true" class="text-dark/30 select-none px-0.5">|</li>
     <li>
       <a href="/en/"
          hreflang="en"
          lang="en"
-         [attr.aria-current]="locale === 'en' ? 'page' : null"
-         [class]="locale === 'en'
+         [attr.aria-current]="locale.startsWith('en') ? 'page' : null"
+         [class]="locale.startsWith('en')
            ? 'text-coral underline font-semibold'
-           : 'text-dark/80 hover:text-dark transition-opacity duration-200'"
+           : 'text-dark opacity-60 hover:opacity-100 transition-opacity duration-200'"
          i18n-aria-label="@@lang-switcher.switch-to-en"
-         aria-label="English">EN</a>
+         aria-label="Váltás angolra"
+         i18n="@@lang-switcher.label-en">EN</a>
     </li>
   </ul>
 </nav>

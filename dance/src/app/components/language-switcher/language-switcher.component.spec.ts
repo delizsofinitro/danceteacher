@@ -17,7 +17,7 @@ describe('LanguageSwitcherComponent', () => {
 
   it('should create the component', () => {
     const el = setup('hu');
-    expect(el.querySelector('app-language-switcher, nav')).toBeTruthy();
+    expect(el.querySelector('nav')).toBeTruthy();
   });
 
   it('should render both /hu/ and /en/ links', () => {
