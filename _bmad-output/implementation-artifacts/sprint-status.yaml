@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-03-21
-last_updated: 2026-03-21
+last_updated: 2026-03-22
 project_key: NOKEY
 tracking_system: file-system
 story_location: _bmad-output/implementation-artifacts
@@ -52,7 +52,7 @@ development_status:
   # ── Epic 2: Navigáció & oldal-keret ─────────────────────────────────────────
   epic-2: in-progress
   2-1-appcomponent-oldal-keret-es-sticky-header: done
-  2-2-languageswitcher-komponens: backlog
+  2-2-languageswitcher-komponens: ready-for-dev
   2-3-mobilenavigation-komponens-fokusztrappal: backlog
   epic-2-retrospective: optional
 
