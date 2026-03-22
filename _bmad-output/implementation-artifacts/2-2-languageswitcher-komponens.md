@@ -2,7 +2,7 @@
 storyId: '2.2'
 storyKey: '2-2-languageswitcher-komponens'
 epicId: '2'
-status: 'review'
+status: 'done'
 createdAt: '2026-03-22'
 completedAt: '2026-03-22'
 ---

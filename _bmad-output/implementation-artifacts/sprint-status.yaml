@@ -52,7 +52,7 @@ development_status:
   # ── Epic 2: Navigáció & oldal-keret ─────────────────────────────────────────
   epic-2: in-progress
   2-1-appcomponent-oldal-keret-es-sticky-header: done
-  2-2-languageswitcher-komponens: review
+  2-2-languageswitcher-komponens: done
   2-3-mobilenavigation-komponens-fokusztrappal: backlog
   epic-2-retrospective: optional
 
