@@ -2,9 +2,9 @@
 storyId: '2.2'
 storyKey: '2-2-languageswitcher-komponens'
 epicId: '2'
-status: 'ready-for-dev'
+status: 'review'
 createdAt: '2026-03-22'
-completedAt: ''
+completedAt: '2026-03-22'
 ---
 
 # Story 2.2 — LanguageSwitcher komponens
@@ -257,10 +257,34 @@ npx @angular/cli@18 test --watch=false --browsers=ChromeHeadless  # unit tesztek
 
 ### Agent Model Used
 
-claude-sonnet-4-5 (GitHub Copilot)
+claude-sonnet-4-6 (GitHub Copilot)
 
 ### Debug Log References
 
+- Regresszió javítás: `app.component.spec.ts` `nav a` selector → `header nav a[href^="#"]` — a `LanguageSwitcherComponent` saját `<nav>`-val rendelkezik, ezért a számlálás 4 helyett 6 volt.
+
 ### Completion Notes List
 
+- ✅ `LanguageSwitcherComponent` létrehozva: `LOCALE_ID` inject, statikus href `/hu/` + `/en/`, `aria-current` dianamikus kötéssel
+- ✅ `AppComponent` integrálva: import + slot-komment helyett `<app-language-switcher />`
+- ✅ 3 új i18n kulcs kinyerve és lefordítva: `lang-switcher.aria-label`, `lang-switcher.switch-to-hu`, `lang-switcher.switch-to-en`
+- ✅ `messages.hu.xlf` szinkronizálva (3 új kulcs)
+- ✅ 10 egységteszt a `LanguageSwitcherComponent`-hez
+- ✅ Build: 0 error, 2 prerendered route
+- ✅ Tesztek: 17/18 ✔ (1 pre-existing Story 1.3 `SsrProbeComponent` failure)
+- ✅ App.component.spec.ts regresszió javítva: selector pontosítva
+
 ### File List
+
+- `dance/src/app/components/language-switcher/language-switcher.component.ts` (ÚJ)
+- `dance/src/app/components/language-switcher/language-switcher.component.html` (ÚJ)
+- `dance/src/app/components/language-switcher/language-switcher.component.css` (ÚJ)
+- `dance/src/app/components/language-switcher/language-switcher.component.spec.ts` (ÚJ)
+- `dance/src/app/app.component.ts` (MÓDOSÍTVA — LanguageSwitcherComponent import)
+- `dance/src/app/app.component.html` (MÓDOSÍTVA — slot-komment → `<app-language-switcher />`)
+- `dance/src/app/app.component.spec.ts` (MÓDOSÍTVA — nav selector javítás)
+- `dance/src/locale/messages.xlf` (FRISSÍTVE — 3 új kulcs)
+- `dance/src/locale/messages.en.xlf` (FRISSÍTVE — 3 EN fordítás)
+- `dance/src/locale/messages.hu.xlf` (FRISSÍTVE — 3 HU kulcs szinkronizálva)
+- `_bmad-output/implementation-artifacts/2-2-languageswitcher-komponens.md` (story state)
+- `_bmad-output/implementation-artifacts/sprint-status.yaml` (status: review)

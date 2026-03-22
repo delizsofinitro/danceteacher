@@ -50,6 +50,18 @@
         <source>Professzionális táncoktatás és koreográfia</source>
         <target state="translated">Professional dance education and choreography</target>
       </trans-unit>
+      <trans-unit id="lang-switcher.aria-label" datatype="html">
+        <source>Nyelvválasztó</source>
+        <target state="translated">Language switcher</target>
+      </trans-unit>
+      <trans-unit id="lang-switcher.switch-to-hu" datatype="html">
+        <source>Magyar</source>
+        <target state="translated">Switch to Hungarian</target>
+      </trans-unit>
+      <trans-unit id="lang-switcher.switch-to-en" datatype="html">
+        <source>English</source>
+        <target state="translated">English</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

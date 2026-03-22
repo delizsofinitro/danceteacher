@@ -38,11 +38,12 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('main#main-content')).toBeTruthy();
   });
 
-  it('should render desktop nav with four links', () => {
+  it('should render desktop nav with four section links', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const navLinks = compiled.querySelectorAll('nav a');
+    // Select only section anchor links (hash hrefs) in the main header nav
+    const navLinks = compiled.querySelectorAll('header nav a[href^="#"]');
     expect(navLinks.length).toBe(4);
   });
 

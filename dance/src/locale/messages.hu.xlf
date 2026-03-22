@@ -53,6 +53,18 @@
         <source>Professzionális táncoktatás és koreográfia</source>
         <target state="final">Professzionális táncoktatás és koreográfia</target>
       </trans-unit>
+      <trans-unit id="lang-switcher.aria-label" datatype="html">
+        <source>Nyelvválasztó</source>
+        <target state="final">Nyelvválasztó</target>
+      </trans-unit>
+      <trans-unit id="lang-switcher.switch-to-hu" datatype="html">
+        <source>Magyar</source>
+        <target state="final">Magyar</target>
+      </trans-unit>
+      <trans-unit id="lang-switcher.switch-to-en" datatype="html">
+        <source>English</source>
+        <target state="final">Váltás angolra</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

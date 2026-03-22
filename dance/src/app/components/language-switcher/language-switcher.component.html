@@ -1,0 +1,27 @@
+<nav aria-label="Nyelvválasztó" i18n-aria-label="@@lang-switcher.aria-label">
+  <ul class="flex items-center gap-1 text-xs font-sans uppercase tracking-[0.06em]">
+    <li>
+      <a href="/hu/"
+         hreflang="hu"
+         lang="hu"
+         [attr.aria-current]="locale === 'hu' ? 'page' : null"
+         [class]="locale === 'hu'
+           ? 'text-coral underline font-semibold'
+           : 'text-dark/80 hover:text-dark transition-opacity duration-200'"
+         i18n-aria-label="@@lang-switcher.switch-to-hu"
+         aria-label="Magyar">HU</a>
+    </li>
+    <li aria-hidden="true" class="text-dark/30 select-none px-0.5">|</li>
+    <li>
+      <a href="/en/"
+         hreflang="en"
+         lang="en"
+         [attr.aria-current]="locale === 'en' ? 'page' : null"
+         [class]="locale === 'en'
+           ? 'text-coral underline font-semibold'
+           : 'text-dark/80 hover:text-dark transition-opacity duration-200'"
+         i18n-aria-label="@@lang-switcher.switch-to-en"
+         aria-label="English">EN</a>
+    </li>
+  </ul>
+</nav>
